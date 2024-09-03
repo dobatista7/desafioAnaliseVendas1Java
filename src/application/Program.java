@@ -49,5 +49,12 @@ public class Program {
         System.out.println();
         System.out.println("Cinco primeiras vendas de 2016 de maior preço médio:");
         topSales2016.forEach(System.out::println);
+
+        // Cálculo do valor total vendido pelo vendedor nos meses 1 e 7
+        Double totalLogan = sales.stream()
+                .filter(s -> s.getSeller().equals("Logan") && (s.getMonth() == 1 || s.getMonth() == 7))
+                .mapToDouble(Sale::getTotal)
+                .sum();
+        
     }
 }
