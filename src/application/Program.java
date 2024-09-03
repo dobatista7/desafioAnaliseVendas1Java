@@ -6,14 +6,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Scanner;
+import java.text.DecimalFormat;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Program {
     public static void main(String[] args) {
+        Locale.setDefault(Locale.US);
         Scanner sc = new Scanner(System.in);
 
         System.out.print("Entre o caminho do arquivo: ");
@@ -55,6 +54,12 @@ public class Program {
                 .filter(s -> s.getSeller().equals("Logan") && (s.getMonth() == 1 || s.getMonth() == 7))
                 .mapToDouble(Sale::getTotal)
                 .sum();
-        
+
+        // Formatação do total
+        DecimalFormat df = new DecimalFormat("0.00");
+        System.out.println();
+        System.out.println("Valor total vendido pelo vendedor Logan nos meses 1 e 7 = " + df.format(totalLogan));
+
+        sc.close();
     }
 }
