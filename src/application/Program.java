@@ -7,8 +7,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Program {
     public static void main(String[] args) {
@@ -36,5 +38,16 @@ public class Program {
             System.out.println("Erro: " + e.getMessage() + " (O sistema não pode encontrar o arquivo especificado) ");
             return; // Encerra o programa em caso de erro na leitura do arquivo
         }
+
+        // Análise das cinco primeiras vendas de 2016 com maior preço médio
+        List<Sale> topSales2016 = sales.stream()
+                .filter(s -> s.getYear() == 2016)
+                .sorted(Comparator.comparing(Sale::getAveragePrice).reversed())
+                .limit(5)
+                .collect(Collectors.toList());
+
+        System.out.println();
+        System.out.println("Cinco primeiras vendas de 2016 de maior preço médio:");
+        topSales2016.forEach(System.out::println);
     }
 }
